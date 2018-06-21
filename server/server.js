@@ -1,7 +1,7 @@
 const http = require('http');
 
 http.createServer((request, response) => {
-  console.log("Requested url: " + request.url);
+  console.log(`Request url: ${request.url}`);
 
   const eventHistory = [];
 
@@ -9,7 +9,7 @@ http.createServer((request, response) => {
     closeConnection(response);
   });
 
-  if (request.url.toLowerCase() == "/events") {
+  if (request.url.toLowerCase() === '/events') {
     response.writeHead(200, {
       Connection: 'keep-alive',
       'Content-Type': 'text/event-stream',
@@ -34,7 +34,7 @@ function sendEvents(response, eventHistory) {
       response.write(eventString);
       eventHistory.push(eventString);
     }
-  }, 5000);
+  }, 3000);
 
   setTimeout(() => {
     if (!response.finished) {
@@ -42,7 +42,7 @@ function sendEvents(response, eventHistory) {
       response.write(eventString);
       eventHistory.push(eventString);
     }
-  }, 15000);
+  }, 6000);
 
   setTimeout(() => {
     if (!response.finished) {
@@ -50,14 +50,14 @@ function sendEvents(response, eventHistory) {
       response.write(eventString);
       eventHistory.push(eventString);
     }
-  }, 25000);
+  }, 9000);
 
   setTimeout(() => {
     if (!response.finished) {
       const eventString = 'id: 4\nevent: closedConnection\ndata: \n\n';
       eventHistory.push(eventString);
     }
-  }, 30000);
+  }, 12000);
 }
 
 function closeConnection(response) {

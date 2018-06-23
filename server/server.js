@@ -19,10 +19,11 @@ http.createServer((request, response) => {
 
     checkConnectionToRestore(request, response, eventHistory);
 
-    return sendEvents(response, eventHistory);
+    sendEvents(response, eventHistory);
+  } else {
+    response.writeHead(404);
+    response.end();  
   }
-  response.writeHead(404);
-  response.end();
 }).listen(5000, () => {
   console.log('Server running at http://127.0.0.1:5000/');
 });

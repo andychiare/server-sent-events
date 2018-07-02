@@ -11,7 +11,7 @@ http.createServer((request, response) => {
 
   if (request.url.toLowerCase() === '/events') {
     response.writeHead(200, {
-      Connection: 'keep-alive',
+      'Connection': 'keep-alive',
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache',
       'Access-Control-Allow-Origin': '*'
